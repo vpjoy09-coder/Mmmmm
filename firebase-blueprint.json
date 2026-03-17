@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user habits, preferences, and routine for Sherya's memory.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "habits": { "type": "array", "items": { "type": "string" } },
+        "preferences": { "type": "array", "items": { "type": "string" } },
+        "routine": { "type": "array", "items": { "type": "string" } },
+        "importantDates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": { "type": "string" },
+              "event": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["name"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Stores a summary of a past conversation for memory recall.",
+      "type": "object",
+      "properties": {
+        "timestamp": { "type": "string", "format": "date-time" },
+        "summary": { "type": "string" },
+        "mood": { "type": "string" }
+      },
+      "required": ["timestamp", "summary"]
+    },
+    "ImprovementLog": {
+      "title": "Improvement Log",
+      "description": "Stores suggestions for improvement or problems encountered.",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["improvement", "problem"] },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["type", "content", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile data."
+    },
+    "/users/{userId}/conversations/{convId}": {
+      "schema": "Conversation",
+      "description": "Past conversation summaries."
+    },
+    "/users/{userId}/logs/{logId}": {
+      "schema": "ImprovementLog",
+      "description": "Improvement and problem logs."
+    }
+  }
+}

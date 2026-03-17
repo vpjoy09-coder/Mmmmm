@@ -1,0 +1,6 @@
+{
+  "appId": "com.ais.app",
+  "appName": "AI Studio App",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
